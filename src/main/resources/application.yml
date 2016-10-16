@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    tomcat:
+      max-active: 4
+      max-wait: 2
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/illy?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul
+      username: placeapi
+      password: placeapidb
+      test-while-idle: true
+      validation-query: SELECT 1
+      test-on-borrow: true

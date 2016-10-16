@@ -16,6 +16,8 @@ import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -41,20 +43,10 @@ public class BatchConfiguration {
 //    public DataSource dataSource;
 
     @Bean
+    @ConfigurationProperties(prefix="spring.datasource.tomcat")
     @Primary
     public DataSource dataSource(){
-        org.apache.tomcat.jdbc.pool.DataSource datasource = new org.apache.tomcat.jdbc.pool.DataSource();
-        datasource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        datasource.setUrl("jdbc:mysql://localhost:3306/illy?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
-        datasource.setUsername("placeapi");
-        datasource.setPassword("placeapidb");
-        datasource.setMaxActive(4);
-        datasource.setMaxWait(5000);
-        datasource.setValidationQuery("SELECT 1");
-        datasource.setTestWhileIdle(true);
-        datasource.setTimeBetweenEvictionRunsMillis(5000);
-        return datasource;
-
+        return DataSourceBuilder.create().build();
     }
 
     @Bean
